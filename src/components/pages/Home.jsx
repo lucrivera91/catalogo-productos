@@ -6,32 +6,61 @@ export const Home = () => {
   const { productos } = useContext(ProductosContext);
 
   return (
-    <Container fluid style={{backgroundColor: "#4e5d6b", minHeight: "100vh", paddingTop: "80px"}}>
+    <Container
+      fluid
+      style={{
+        backgroundColor: "#4e5d6b",
+        minHeight: "100vh",
+        paddingTop: "80px",
+      }}
+    >
       <Container>
-        <Row>
+        <Row className="justify-content-around">
           {productos.map((item) => (
-            <Col key={item.id} sm={12} md={4} lg={3}>
-              <Card bg="dark" text="light">
-                <Card.Img
-                  className="align-self-center"
-                  variant="top"
-                  src={item.image}
-                  style={{ maxWidth: "200px" }}
-                />
+            <Col key={item.id} sm={12} md={6} lg={4}>
+              <Card
+                bg="dark"
+                text="light"
+                className="p-1 mb-3"
+                style={{ minHeight: "550px" }}
+              >
+                <Card.Header
+                  style={{ borderColor: "white", backgroundColor: "#363a3f" }}
+                >
+                  {item.category}
+                </Card.Header>
+                <Container
+                  fluid
+                  className="d-flex justify-content-center mt-2"
+                  style={{ backgroundColor: "white" }}
+                >
+                  <Card.Img
+                    variant="top"
+                    src={item.image}
+                    style={{ maxWidth: "200px", maxHeight: "250px" }}
+                  />
+                </Container>
+
                 <Card.Body>
                   <Card.Title>{item.title}</Card.Title>
-                  <Card.Text>
-                    <Accordion data-bs-theme="dark">
-                      <Accordion.Item eventKey={item.id}>
-                        <Accordion.Header>Descripción</Accordion.Header>
-                        <Accordion.Body>{item.description}</Accordion.Body>
-                      </Accordion.Item>
-                    </Accordion>
-                  </Card.Text>
+
+                  <Accordion>
+                    <Accordion.Item eventKey={item.id}>
+                      <Accordion.Header>Descripción</Accordion.Header>
+                      <Accordion.Body>{item.description}</Accordion.Body>
+                    </Accordion.Item>
+                  </Accordion>
                 </Card.Body>
-                <Card.Footer className="text-muted">
-                  {item.category}
-                  {item.price}
+                <Card.Footer
+                  as="h4"
+                  style={{
+                    color: "#3de552",
+                    borderColor: "white",
+                    backgroundColor: "#363a3f",
+                  }}
+                  className="d-flex justify-content-end"
+                >
+                  ${item.price}
                 </Card.Footer>
               </Card>
             </Col>
